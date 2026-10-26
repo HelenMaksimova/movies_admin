@@ -1,0 +1,27 @@
+services:
+  admin:
+    container_name: admin
+    build: ..
+    expose:
+      - "8000"
+    env_file:
+      - ../.env.app
+    volumes:
+      - nginx_static:${STATIC_ROOT:-/opt/app/static}
+      - nginx_media:${MEDIA_ROOT:-/opt/app/media}
+    command:
+      - sh
+      - -c
+      - |
+        python manage.py collectstatic --no-input &&
+        python manage.py migrate contenttypes &&
+        python manage.py migrate auth &&
+        python manage.py migrate admin &&
+        python manage.py migrate sessions &&
+        python manage.py createsuperusercustom \
+          --username=${DJANGO_SUPERUSER_USERNAME} \
+          --email=${DJANGO_SUPERUSER_EMAIL} \
+          --password=${DJANGO_SUPERUSER_PASSWORD} &&
+        gunicorn -c /opt/app/gunicorn.conf.py
+    networks:
+      - movies_net

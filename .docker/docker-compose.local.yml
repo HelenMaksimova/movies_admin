@@ -1,0 +1,9 @@
+name: movies_admin
+
+include:
+  - docker-compose.base.local.yml
+
+networks:
+  movies_net:
+    external: true
+
