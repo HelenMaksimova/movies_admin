@@ -1,0 +1,16 @@
+name: movies_admin
+
+include:
+  - docker-compose.base.yml
+
+volumes:
+  nginx_static:
+    name: nginx_static
+    external: True
+  nginx_media:
+    name: nginx_media
+    external: True
+
+networks:
+  movies_net:
+    external: true
