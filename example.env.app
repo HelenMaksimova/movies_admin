@@ -17,8 +17,8 @@ STATIC_ROOT=/var/www/static/
 MEDIA_ROOT=/var/www/media/
 
 SQL_ENGINE=django.db.backends.postgresql_psycopg2
-POSTGRES_USER=user
-POSTGRES_PASSWORD=password
+POSTGRES_USER=app
+POSTGRES_PASSWORD=123qwe
 POSTGRES_DB=theater
 
 SQL_HOST=postgres
